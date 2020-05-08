@@ -1,0 +1,31 @@
+<div class="col s12 m6">
+	<div class="card blue-grey darken-1">
+		<div class="card-content white-text">
+			<div class="file-field input-field" id="file"></div>
+			<div class="input-field">
+				<input
+					class="white-text"
+					type="text"
+					value="<%=user.username%>"
+					disabled
+				/>
+				<input
+					class="white-text hide"
+					type="text"
+					value="<%=user.email%>"
+					name="correo"
+				/>
+			</div>
+			<div class="input-field">
+				<input
+					name="Titulo"
+					id="Titulo"
+					type="text"
+					class="validate"
+					required
+				/>
+				<label for="Titulo">Titulo</label>
+			</div>
+		</div>
+	</div>
+</div>

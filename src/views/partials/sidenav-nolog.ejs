@@ -1,0 +1,151 @@
+<ul id="buscar" class="side-nav">
+	<form id="buscar_nolog">
+		<nav>
+			<div class="nav-wrapper">
+				<div class="input-field deep-purple lighten-3">
+					<input
+						id="search"
+						name="search"
+						type="search"
+						class="autocomplete"
+						required
+						autocomplete="off"
+					/>
+					<label class="label-icon" for="search"
+						><i class="material-icons">search</i></label
+					>
+					<i class="material-icons">close</i>
+				</div>
+			</div>
+		</nav>
+		<ul class="collapsible" data-collapsible="expandable">
+			<li>
+				<div class="collapsible-header">
+					<i class="material-icons">photo_library</i>Formato
+				</div>
+				<div class="collapsible-body row">
+					<p class="col s12 m6">
+						<input type="checkbox" class="filled-in" id="JPG" name="JPG" />
+						<label for="JPG" class="black-text">JPG</label>
+					</p>
+					<p class="col s12 m6">
+						<input type="checkbox" class="filled-in" id="PNG" name="PNG" />
+						<label for="PNG" class="black-text">PNG</label>
+					</p>
+					<p class="col s12 m6">
+						<input type="checkbox" class="filled-in" id="PSD" name="PSD" />
+						<label for="PSD" class="black-text">PSD</label>
+					</p>
+					<p class="col s12 m6">
+						<input type="checkbox" class="filled-in" id="JPEG" name="JPEG" />
+						<label for="JPEG" class="black-text">JPEG</label>
+					</p>
+				</div>
+			</li>
+
+			<li>
+				<div class="collapsible-header">
+					<i class="material-icons"> emoji_flags</i>Tipo
+				</div>
+				<div class="collapsible-body row">
+					<p class="col s6">
+						<input
+							type="checkbox"
+							class="filled-in"
+							id="premium"
+							name="premium"
+						/>
+						<label for="premium" class="black-text"
+							>premium<i class="material-icons"> emoji_events</i></label
+						>
+					</p>
+					<p class="col s6">
+						<input
+							type="checkbox"
+							class="filled-in"
+							id="Gratis"
+							name="Gratis"
+						/>
+						<label for="Gratis" class="black-text"
+							>Gratis <i class="material-icons"> public</i></label
+						>
+					</p>
+				</div>
+			</li>
+
+			<li>
+				<div class="collapsible-header">
+					<i class="material-icons">palette</i>Color
+				</div>
+
+				<div class="collapsible-body row">
+					<% colores.forEach( color => { %>
+					<p class="col s12 m6">
+						<input
+							type="checkbox"
+							class="filled-in"
+							id="<%=color.text%>"
+							name="<%=color.text%>"
+						/>
+						<label for="<%=color.text%>" class="black-text"
+							><%=color.text%></label
+						>
+					</p>
+
+					<script>
+						var <%=color.text%> = document.getElementById('<%=color.text%>').addEventListener(
+							'click',
+							(azul = () => {
+								if (colores.indexOf('<%=color.text%>') == -1) {
+									colores.push('<%=color.text%>');
+								}
+							})
+						);
+					</script>
+					<%})%>
+				</div>
+			</li>
+
+			<li>
+				<div class="collapsible-header">
+					<i class="material-icons">crop_free</i>Oritentacion
+				</div>
+				<div class="collapsible-body row">
+					<p class="col s6">
+						<input
+							type="checkbox"
+							class="filled-in"
+							id="Horizontal"
+							name="Horizontal"
+						/>
+						<label for="Horizontal" class="black-text"
+							>Horizontal <i class="material-icons"> crop_7_5</i></label
+						>
+					</p>
+					<p class="col s6">
+						<input
+							type="checkbox"
+							class="filled-in"
+							id="Vertical"
+							name="Vertical"
+						/>
+						<label for="Vertical" class="black-text"
+							>Vertical <i class="material-icons"> crop_portrait</i></label
+						>
+					</p>
+				</div>
+			</li>
+
+			<li class="row container hide-on-large-only">
+				<button
+					class="btn waves-effect waves-light col s12"
+					type="submit"
+					name="action"
+				>
+					Submit
+					<i class="material-icons right">send</i>
+				</button>
+			</li>
+		</ul>
+	</form>
+</ul>

@@ -1,0 +1,35 @@
+[
+	{
+		"code_email": "",
+		"code_format": "",
+		"code_orientation": "",
+		"code_color": "",
+		"code_tag": "",
+		"code_license": "",
+		"route": "",
+		"name": "",
+		"title": "",
+		"mensajes": [
+			{
+				"name": "",
+				"datos_mensaje": [
+					{
+						"usuario": "",
+						"mensaje": ""
+					}
+				]
+			}
+		],
+		"gusta": [
+			{
+				"name": "",
+				"datos_gusta": [
+					{
+						"usuario": "",
+						"gusta": ""
+					}
+				]
+			}
+		]
+	}
+]

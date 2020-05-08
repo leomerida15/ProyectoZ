@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--Import Google Icon Font-->
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+		<!--Import materialize.css-->
+		<!-- Compiled and minified CSS -->
+		<link rel="stylesheet" href="/css/materialize.min.css" />
+
+		<!--Let browser know website is optimized for mobile-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	</head>
+	<body id="todo">
+		<%- include('elementos-log/ventanas-log') %>
+		<nav class="nav-extended black">
+			<div class="nav-wrapper nav-content black">
+				<a href="#" class="brand-logo center"><img src="/img/logo.png" width="180px" height="60px" /> </a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down"></ul>
+			</div>
+		 <%- include('elementos-log/nav-log') %> 
+		</nav>
+
+		<%- include('partials/respuesta-nolog') %>
+
+			<div class="section">
+				<div id="test1" class="col s12">
+					<%- include('elementos-log/galeria1-log') %>
+				</div>
+				<div id="test2" class="col s12">
+					<%- include('elementos-log/galeria2-log') %>
+				</div>
+				<div id="test3" class="col s12">
+					<%- include('elementos-log/galeria3-log') %>
+				</div>
+				<div id="test4" class="col s12">
+					<%- include('elementos-log/galeria4-log') %>
+				</div>
+			</div>
+		</div>
+
+		<%- include('elementos-log/flotante-log') %> <%- include('elementos-log/subir-img-log') %>
+		<!--JavaScript at end of body for optimized loading-->
+
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/materialize.min.js"></script>
+		<script src="/js/extra.js"></script>
+		<script src="/js/app.js"></script>
+		<script src="/js/tags.js"></script>
+		<script src="/js/x.js"></script>
+		<script src="/js/UI.js"></script>
+		<script src="js/protos.js"></script>
+	
+	</body>
+</html>

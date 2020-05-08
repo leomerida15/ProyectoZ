@@ -1,0 +1,29 @@
+<div class="col s12 m6">
+	<div class="card blue-grey darken-1">
+		<div class="card-content white-text">
+			<% if(user.typeuser!="usuarioBasico"){%>
+			<span class="card-title">Indique su tipo de archivo y licencia.</span>
+			<%} else {%>
+			<span class="card-title">Indique su tipo de archivo.</span>
+			<%}%>
+			<div class="input-field">
+				<a class="waves-effect waves-light btn" id="PSD">PSD</a>
+			</div>
+			<div class="input-field">
+				<a class="waves-effect waves-light btn" id="Otros">Otros</a>
+			</div>
+		</div>
+		<% if(user.typeuser!="usuarioBasico"){%>
+		<div class="card-content white-text">
+			<select name="licencia" required>
+				<option value="" disabled selected>licencia</option>
+				<option value="basica"></option>
+			</select>
+		</div>
+		<%} else {%>
+		<div class="card-content white-text">
+			<input class="hide" type="text" name="type" name="type" value="gratis" />
+		</div>
+		<%}%>
+	</div>
+</div>

@@ -1,0 +1,3 @@
+function xrespuesta() {
+	respuesta.innerHTML = '';
+}

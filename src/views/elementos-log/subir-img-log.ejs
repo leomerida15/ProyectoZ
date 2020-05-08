@@ -1,0 +1,14 @@
+<!-- Modal Structure -->
+<div id="subir_img_log" class="modal row">
+	<form
+		action="/subir_img_log"
+		method="POST"
+		enctype="multipart/form-data"
+		id="subidaImg"
+	>
+		<%- include('form-subida-img/tipo') %>
+		<%-include('form-subida-img/archivo-titulo') %>
+		<%-include('form-subida-img/color-orientacion') %>
+		<%-include('form-subida-img/tags') %>
+	</form>
+</div>

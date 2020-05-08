@@ -1,0 +1,60 @@
+<div class="col s12 m6">
+	<div class="card blue-grey darken-1">
+		<div class="card-content white-text">
+			<div class="input-field white-text">
+				<select name="Etiqueta_1" required>
+					<option value="" disabled selected>Etiqueta 1</option>
+					<% tags.forEach( tags => { %>
+
+					<option value="<%= tags.code_tag%>"><%= tags.code_tag%></option>
+
+					<% }) %>
+				</select>
+			</div>
+
+			<div class="input-field white-text">
+				<select name="Etiqueta_2" required>
+					<option value="" disabled selected>Etiqueta 2</option>
+					<% tags.forEach( tags => { %>
+
+					<option value="<%= tags.code_tag%>"><%= tags.code_tag%></option>
+
+					<% }) %>
+				</select>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="col s12 m6">
+	<div class="card blue-grey darken-1">
+		<div class="card-content white-text">
+			<div class="input-field white-text">
+				<select name="Etiqueta_3" required>
+					<option value="" disabled selected>Etiqueta 3</option>
+					<% tags.forEach( tags => { %>
+
+					<option value="<%= tags.code_tag%>"><%= tags.code_tag%></option>
+
+					<% }) %>
+				</select>
+			</div>
+
+			<div class="input-field white-text">
+				<select name="Etiqueta_4" required>
+					<option value="" disabled selected>Etiqueta 4</option>
+					<% tags.forEach( tags => { %>
+
+					<option value="<%= tags.code_tag%>"><%= tags.code_tag%></option>
+
+					<% }) %>
+				</select>
+			</div>
+		</div>
+		<div class="card-action">
+			<button class="btn waves-effect waves-light right" type="submit" id="asubmit">
+				enviar
+				<i class="material-icons right">send</i>
+			</button>
+		</div>
+	</div>
+</div>
