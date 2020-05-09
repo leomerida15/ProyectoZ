@@ -1,6 +1,6 @@
 // alert('hola');
 
-const PSD = document.getElementById('PSD').addEventListener('click', PSD_file => {
+document.getElementById('PSD_file').addEventListener('click', () => {
 	file.innerHTML = `	
 	
 	<div class="btn">
@@ -14,7 +14,7 @@ const PSD = document.getElementById('PSD').addEventListener('click', PSD_file =>
 `;
 });
 
-const Otros = document.getElementById('Otros').addEventListener('click', Otros_file => {
+document.getElementById('Otros_file').addEventListener('click', () => {
 	file.innerHTML = `	
 	
 	<div class="btn">

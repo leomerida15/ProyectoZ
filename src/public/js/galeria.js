@@ -1,8 +1,7 @@
-(async function img() {
+(img = async () => {
 	const img = await fetch('/api/img');
 	const imgJsonS = await img.json();
-	// console.log(imgJson[0].name);
-	// alert('hola');
+
 	var imagenes = imgJsonS;
 	for (var i = 0; i <= 30; i++) {
 		var aleatorio = Math.round(Math.random() * (imgJsonS.length - 1));
@@ -16,9 +15,10 @@
             </div>
 		</div>
 		
-		
 		`;
 	}
-
-	// console.log(imagen);
 })();
+
+document.getElementById('logo').addEventListener('click', () => {
+	img();
+});

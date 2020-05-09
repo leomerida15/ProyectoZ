@@ -99,64 +99,65 @@ buscar.addEventListener(
 
 			$('.button-collapse').sideNav('hide');
 
-			cuerpo.innerHTML = `
-		<div class='center-align '>
-			<div class="preloader-wrapper big active center-align">
-				<div class="spinner-layer spinner-blue">
-				  <div class="circle-clipper left">
-					<div class="circle"></div>
-				  </div><div class="gap-patch">
-					<div class="circle"></div>
-				  </div><div class="circle-clipper right">
-					<div class="circle"></div>
-				  </div>
-				</div>
+			cuerpo1.innerHTML = `
+				<div class='center-align '>
+					<div class="preloader-wrapper big active center-align">
+						<div class="spinner-layer spinner-blue">
+						  <div class="circle-clipper left">
+							<div class="circle"></div>
+						  </div><div class="gap-patch">
+							<div class="circle"></div>
+						  </div><div class="circle-clipper right">
+							<div class="circle"></div>
+						  </div>
+						</div>
 
-				<div class="spinner-layer spinner-red">
-				  <div class="circle-clipper left">
-					<div class="circle"></div>
-				  </div><div class="gap-patch">
-					<div class="circle"></div>
-				  </div><div class="circle-clipper right">
-					<div class="circle"></div>
-				  </div>
-				</div>
+						<div class="spinner-layer spinner-red">
+						  <div class="circle-clipper left">
+							<div class="circle"></div>
+						  </div><div class="gap-patch">
+							<div class="circle"></div>
+						  </div><div class="circle-clipper right">
+							<div class="circle"></div>
+						  </div>
+						</div>
 
-				<div class="spinner-layer spinner-yellow">
-				  <div class="circle-clipper left">
-					<div class="circle"></div>
-				  </div><div class="gap-patch">
-					<div class="circle"></div>
-				  </div><div class="circle-clipper right">
-					<div class="circle"></div>
-				  </div>
-				</div>
+						<div class="spinner-layer spinner-yellow">
+						  <div class="circle-clipper left">
+							<div class="circle"></div>
+						  </div><div class="gap-patch">
+							<div class="circle"></div>
+						  </div><div class="circle-clipper right">
+							<div class="circle"></div>
+						  </div>
+						</div>
 
-				<div class="spinner-layer spinner-green">
-				  <div class="circle-clipper left">
-					<div class="circle"></div>
-				  </div><div class="gap-patch">
-					<div class="circle"></div>
-				  </div><div class="circle-clipper right">
-					<div class="circle"></div>
-				  </div>
+						<div class="spinner-layer spinner-green">
+						  <div class="circle-clipper left">
+							<div class="circle"></div>
+						  </div><div class="gap-patch">
+							<div class="circle"></div>
+						  </div><div class="circle-clipper right">
+							<div class="circle"></div>
+						  </div>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-		`;
-
+			`;
+			muro.innerHTML = `resultado`;
 			const resul = await fetch('/buscar', {
 				method: 'post',
 				body: datos,
 			});
 
 			var resp = await resul.json();
+			// alert(resp[0]);
 
 			if (resp.includes('err')) {
-				cuerpo.innerHTML = ``;
-				cuerpo.innerHTML += `
-				<h4 class="truncate hide-on-small-only">No encontramos lo que esta buscando</h4>
-				<h5 class="truncate hide-on-med-and-up">No encontramos lo que busca</h5>
+				cuerpo1.innerHTML = ``;
+				cuerpo1.innerHTML += `
+					<h4 class="truncate hide-on-small-only">No encontramos lo que esta buscando</h4>
+					<h5 class="truncate hide-on-med-and-up">No encontramos lo que busca</h5>
 				`;
 			} else {
 				resp.sort((a, b) => {
@@ -166,13 +167,14 @@ buscar.addEventListener(
 					if (a.lvl < b.lvl) {
 						return 1;
 					}
-					// a must be equal to b
+
 					return 0;
 				});
+				muro.innerHTML = `resultado`;
 
-				cuerpo.innerHTML = ``;
+				cuerpo1.innerHTML = ``;
 				resp.forEach((res) => {
-					cuerpo.innerHTML += `
+					cuerpo1.innerHTML += `
 						<div class="col s12 m4 l3">
 							<div class="material-placeholder">
 								<a class="waves-effect waves-light modal-trigger" href="#${res.id}">

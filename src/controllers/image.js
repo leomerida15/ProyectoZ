@@ -9,8 +9,6 @@ const {
 	agregar_mensajes_Json,
 	agregar_gustas_Json,
 	agregarTags,
-	agregarType,
-	agregarColor,
 } = require('../json.Query');
 
 imgCtrol.subir_img = async (req, res) => {
@@ -78,13 +76,11 @@ imgCtrol.subir_img = async (req, res) => {
 
 					await agregar_mensajes_Json(newName);
 
-					await agregar_images_Json(carpeta2, lugar, newName);
+					await agregar_images_Json(carpeta2, lugar, newName, req.body.type);
 
 					await agregar_gustas_Json(newName);
 
-					await agregarJson(newName);
-
-					await agregarTags(req, newName);
+					await agregarTags(req, lugar, carpeta2, newName);
 
 					query[3].values = [
 						`${req.body.correo}`,
@@ -156,11 +152,11 @@ imgCtrol.subir_img = async (req, res) => {
 
 				await agregar_mensajes_Json(newName);
 
-				await agregar_images_Json(carpeta, lugar, newName);
+				await agregar_images_Json(carpeta, lugar, newName, req);
 
 				await agregar_gustas_Json(newName);
 
-				await agregarTags(req, lugar, carpeta);
+				await agregarTags(req, lugar, carpeta, newName);
 
 				query[3].values = [
 					`${req.body.correo}`,

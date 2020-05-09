@@ -59,27 +59,49 @@ const ruta_images = 'src/json/images.json';
 const json_images = fs.readFileSync(ruta_images, 'utf-8');
 const list_images = JSON.parse(json_images);
 
-jsonQuery.agregar_images_Json = (carpeta, lugar, newName) => {
+jsonQuery.agregar_images_Json = (carpeta, lugar, newName, req) => {
 	var images = list_images;
 	images.contenido.push({
 		name: newName,
 		ubicacion: lugar,
 		code_formato: carpeta,
+		type: req.body.type,
+		Titulo: req.body.Titulo,
 	});
 
-	// console.log(images.carpeta);
+	console.log(req.body);
 
 	if (carpeta == 'jpg') {
-		images.jpg.push({ name: newName, ubicacion: lugar, code_formato: carpeta });
+		images.jpg.push({
+			name: newName,
+			ubicacion: lugar,
+			code_formato: carpeta,
+			type: req.body.type,
+			Titulo: req.body.Titulo,
+		});
 	} else if (carpeta == 'png') {
-		images.png.push({ name: newName, ubicacion: lugar, code_formato: carpeta });
+		images.png.push({
+			name: newName,
+			ubicacion: lugar,
+			code_formato: carpeta,
+			type: req.body.type,
+			Titulo: req.body.Titulo,
+		});
 	} else if (carpeta == 'psd') {
-		images.psd.push({ name: newName, ubicacion: lugar, code_formato: carpeta });
+		images.psd.push({
+			name: newName,
+			ubicacion: lugar,
+			code_formato: carpeta,
+			type: req.body.type,
+			Titulo: req.body.Titulo,
+		});
 	} else if (carpeta == 'jpeg') {
 		images.jpeg.push({
 			name: newName,
 			ubicacion: lugar,
 			code_formato: carpeta,
+			type: req.body.type,
+			Titulo: req.body.Titulo,
 		});
 	}
 
@@ -206,7 +228,7 @@ jsonQuery.tags_search_Json = () => {
 	return list_tags.for_tag;
 };
 
-jsonQuery.agregarTags = async (req, lugar, fotmat) => {
+jsonQuery.agregarTags = async (req, lugar, fotmat, newName) => {
 	var cadenaADividir = req.body.tags;
 	const newTags = await cadenaADividir.split(',');
 
@@ -233,32 +255,30 @@ jsonQuery.agregarTags = async (req, lugar, fotmat) => {
 
 		for (let i = 0; i <= list_tags.tags_existentes.length - 1; i++) {
 			if (tag == list_tags.tags_existentes[i].tag) {
-				for (let j = 0; j <= list_tags.for_tag.length - 1; j++) {
-					if (tag == list_tags.for_tag[j].tag) {
-						list_tags.for_tag[j].data.push({
-							lugar: lugar,
-							fotmat: fotmat,
-							color: req.body.color,
-							orientacion: req.body.orientacion,
-						});
-						j = list_tags.for_tag.length - 1;
-					}
-				}
 				cheq = 1;
+				list_tags.for_tag[i].data.push({
+					lugar: lugar,
+					name: newName,
+					fotmat: fotmat,
+					type: req.body.type,
+					color: req.body.color,
+					orientacion: req.body.orientacion,
+				});
 				i = list_tags.tags_existentes.length - 1;
 			}
 		}
-		if (cheq == 0) {
-			list_tags.tags_existentes.push({ tag: tag });
-		}
 
 		if (cheq == 0) {
+			list_tags.tags_existentes.push({ tag: tag });
+
 			list_tags.for_tag.push({
 				tag: tag,
 				data: [
 					{
 						lugar: lugar,
+						name: newName,
 						fotmat: fotmat,
+						type: req.body.type,
 						color: req.body.color,
 						orientacion: req.body.orientacion,
 					},
@@ -269,64 +289,6 @@ jsonQuery.agregarTags = async (req, lugar, fotmat) => {
 
 	var json_tags_new = JSON.stringify(list_tags);
 	fs.writeFileSync(rutaTags, json_tags_new, 'utf-8', function (err) {
-		if (err) {
-			return console.log(err);
-		}
-	});
-};
-
-const rutaType = 'src/json/type.json';
-const json_Type = fs.readFileSync(rutaType, 'utf-8');
-const list_Type = JSON.parse(json_Type);
-
-jsonQuery.agregarType = async (lugar, type, orientacion) => {
-	console.log(list_Type);
-
-	if (type == 'gratis') {
-		if (orientacion == 'Horizontal') {
-			list_Type.gratis.horizontal.push(lugar);
-		} else {
-			list_Type.gratis.vertical.push(lugar);
-		}
-	} else {
-		if (orientacion == 'Horizontal') {
-			list_Type.premiun.horizontal.push(lugar);
-		} else {
-			list_Type.premiun.vertical.push(lugar);
-		}
-	}
-
-	var json_type_new = JSON.stringify(list_Type);
-	fs.writeFileSync(rutaType, json_type_new, 'utf-8', (err) => {
-		if (err) {
-			return console.log(err);
-		}
-	});
-};
-
-const rutacolor = 'src/json/color.json';
-const json_color = fs.readFileSync(rutacolor, 'utf-8');
-const list_color = JSON.parse(json_color);
-
-jsonQuery.agregarColor = async (lugar, newColor) => {
-	if (newColor == 'marrón') {
-		color_a_guardar = 'marron';
-	} else if (newColor == 'índigo') {
-		color_a_guardar = 'indigo';
-	} else if (newColor == 'ámbar') {
-		color_a_guardar = 'ambar';
-	} else {
-		color_a_guardar = newColor;
-	}
-
-	for (let i = 0; i <= list_color.length - 1; i++) {
-		if (color_a_guardar == list_color[i].color) {
-			list_color[i].datos.push(lugar);
-		}
-	}
-
-	var json_color_new = JSON.stringify(list_color);
-	fs.writeFileSync(rutacolor, json_color_new, 'utf-8', (err) => {
 		if (err) {
 			return console.log(err);
 		}
