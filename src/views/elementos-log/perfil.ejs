@@ -1,0 +1,49 @@
+<div class="container row" id="archivo"></div>
+<!-- <script>
+	(async () => {
+		var userAFI = ['<%=user.username%>'];
+		// alert(userAFI[0]);
+		var datos = new URLSearchParams({
+			userAFI,
+		});
+		// alert(datos);
+		var carpetas = await fetch('/carpetas', {
+			method: 'POST',
+			body: datos,
+		});
+		await carpetas.json();
+		archivo.innerHTML += `
+		<ul class="collapsible" data-collapsible="acordion">
+			<li>
+	   		  <div class="collapsible-header"><i class="material-icons">create_new_folder</i>Neva carpeta</div>
+	   		  <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+	   		</li>`;
+
+		carpeta.forEach((item) => {
+			archivo.innerHTML += `
+			<li>
+	   		  	<div class="collapsible-header"><i class="material-icons">folder</i>${carpeta.nombreCarpeta}</div>
+					 <div class="collapsible-body">
+			`;
+			item.contenido.forEach((img) => {
+				archivo.innerHTML += `
+					<div class="col s12 m4 l3">
+						<div class="material-placeholder">
+							<a class="waves-effect waves-light modal-trigger" href="#${img.idImg}">
+							<img src="img/${img.ruta}" class="responsive-img " alt="" />
+							</a>
+						</div>
+					</div>
+				`;
+			});
+			archivo.innerHTML += `
+				</div>
+			</li>
+			`;
+		});
+
+		archivo.innerHTML += `
+	 	</ul>
+	    `;
+	})();
+</script> -->

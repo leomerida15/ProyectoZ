@@ -1,4 +1,162 @@
 {
-	"for_tag": [],
-	"tags_existentes": []
+	"for_tag": [
+		{
+			"tag": "dios de la guerra",
+			"data": [
+				{
+					"lugar": "png/1_iep93k_2bufa6.png",
+					"name": "1_iep93k_2bufa6.png",
+					"fotmat": "png",
+					"type": "gratis",
+					"color": "rojo",
+					"orientacion": "Horizontal"
+				},
+				{
+					"lugar": "jpg/3_c7bosj_b4jq4t.jpg",
+					"name": "3_c7bosj_b4jq4t.jpg",
+					"fotmat": "jpg",
+					"type": "gratis",
+					"color": "azul",
+					"orientacion": "Horizontal"
+				}
+			]
+		},
+		{
+			"tag": "animal",
+			"data": [
+				{
+					"lugar": "jpg/2_jdmp98_vbkqve.jpg",
+					"name": "2_jdmp98_vbkqve.jpg",
+					"fotmat": "jpg",
+					"type": "gratis",
+					"color": "gris",
+					"orientacion": "Horizontal"
+				},
+				{
+					"lugar": "jpg/3_c7bosj_b4jq4t.jpg",
+					"name": "3_c7bosj_b4jq4t.jpg",
+					"fotmat": "jpg",
+					"type": "gratis",
+					"color": "azul",
+					"orientacion": "Horizontal"
+				}
+			]
+		},
+		{
+			"tag": "marsupial",
+			"data": [
+				{
+					"lugar": "jpg/2_jdmp98_vbkqve.jpg",
+					"name": "2_jdmp98_vbkqve.jpg",
+					"fotmat": "jpg",
+					"type": "gratis",
+					"color": "gris",
+					"orientacion": "Horizontal"
+				}
+			]
+		},
+		{
+			"tag": "koala",
+			"data": [
+				{
+					"lugar": "jpg/2_jdmp98_vbkqve.jpg",
+					"name": "2_jdmp98_vbkqve.jpg",
+					"fotmat": "jpg",
+					"type": "gratis",
+					"color": "gris",
+					"orientacion": "Horizontal"
+				}
+			]
+		},
+		{
+			"tag": "aves",
+			"data": [
+				{
+					"lugar": "jpg/3_c7bosj_b4jq4t.jpg",
+					"name": "3_c7bosj_b4jq4t.jpg",
+					"fotmat": "jpg",
+					"type": "gratis",
+					"color": "azul",
+					"orientacion": "Horizontal"
+				}
+			]
+		},
+		{
+			"tag": "dios",
+			"data": [
+				{
+					"lugar": "jpg/3_c7bosj_b4jq4t.jpg",
+					"name": "3_c7bosj_b4jq4t.jpg",
+					"fotmat": "jpg",
+					"type": "gratis",
+					"color": "azul",
+					"orientacion": "Horizontal"
+				}
+			]
+		},
+		{
+			"tag": "de",
+			"data": [
+				{
+					"lugar": "jpg/3_c7bosj_b4jq4t.jpg",
+					"name": "3_c7bosj_b4jq4t.jpg",
+					"fotmat": "jpg",
+					"type": "gratis",
+					"color": "azul",
+					"orientacion": "Horizontal"
+				}
+			]
+		},
+		{
+			"tag": "la",
+			"data": [
+				{
+					"lugar": "jpg/3_c7bosj_b4jq4t.jpg",
+					"name": "3_c7bosj_b4jq4t.jpg",
+					"fotmat": "jpg",
+					"type": "gratis",
+					"color": "azul",
+					"orientacion": "Horizontal"
+				}
+			]
+		},
+		{
+			"tag": "guerra",
+			"data": [
+				{
+					"lugar": "jpg/3_c7bosj_b4jq4t.jpg",
+					"name": "3_c7bosj_b4jq4t.jpg",
+					"fotmat": "jpg",
+					"type": "gratis",
+					"color": "azul",
+					"orientacion": "Horizontal"
+				}
+			]
+		},
+		{
+			"tag": "pinguino",
+			"data": [
+				{
+					"lugar": "jpg/3_c7bosj_b4jq4t.jpg",
+					"name": "3_c7bosj_b4jq4t.jpg",
+					"fotmat": "jpg",
+					"type": "gratis",
+					"color": "azul",
+					"orientacion": "Horizontal"
+				}
+			]
+		}
+	],
+	"tags_existentes": [
+		{ "tag": "dios de la guerra" },
+		{ "tag": "animal" },
+		{ "tag": "marsupial" },
+		{ "tag": "koala" },
+		{ "tag": "aves" },
+		{ "tag": "dios" },
+		{ "tag": "de" },
+		{ "tag": "la" },
+		{ "tag": "guerra" },
+		{ "tag": "pinguino" }
+	]
 }

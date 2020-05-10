@@ -1,0 +1,14 @@
+[
+	{
+		"propietario": "prueba",
+		"data": [
+			{ "nombreCarpeta": "Inicial", "contenido": [{ "idImg": "", "ruta": "" }] }
+		]
+	},
+	{
+		"propietario": "admin",
+		"data": [
+			{ "nombreCarpeta": "Inicial", "contenido": [{ "idImg": "", "type": "" }] }
+		]
+	}
+]

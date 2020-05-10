@@ -69,8 +69,6 @@ jsonQuery.agregar_images_Json = (carpeta, lugar, newName, req) => {
 		Titulo: req.body.Titulo,
 	});
 
-	console.log(req.body);
-
 	if (carpeta == 'jpg') {
 		images.jpg.push({
 			name: newName,
@@ -118,6 +116,7 @@ jsonQuery.agregar_images_Json = (carpeta, lugar, newName, req) => {
 jsonQuery.select_images_Json = () => {
 	return list_images.contenido;
 };
+
 jsonQuery.select_images_inicio_Json = () => {
 	return list_images;
 };
@@ -142,6 +141,7 @@ jsonQuery.agregar_gustas_Json = (newName) => {
 jsonQuery.new_gustas_Json = (req) => {
 	var gustas = list_gustas;
 	var lugar = 0;
+	// console.log(req.body);
 
 	for (let i = 0; i <= gustas.length - 1; i++) {
 		if (gustas[i].name == req.body.name_gusta) {
@@ -154,6 +154,7 @@ jsonQuery.new_gustas_Json = (req) => {
 						usuario: req.body.usuario_gusta,
 						gusta: req.body.gusta,
 					});
+					gustas[i].si = gustas[i].si + 1;
 				} else {
 					for (let j = 0; j <= datos.length - 1; j++) {
 						if (datos[j].usuario == req.body.usuario_gusta) {
@@ -177,6 +178,7 @@ jsonQuery.new_gustas_Json = (req) => {
 						usuario: req.body.usuario_gusta,
 						gusta: req.body.gusta,
 					});
+					gustas[i].no = gustas[i].no + 1;
 				} else {
 					for (let j = 0; j <= datos.length - 1; j++) {
 						if (datos[j].usuario == req.body.usuario_gusta) {
@@ -293,6 +295,36 @@ jsonQuery.agregarTags = async (req, lugar, fotmat, newName) => {
 			return console.log(err);
 		}
 	});
+};
+
+const rutaCarpetas = 'src/json/bibliotecas.json';
+const json_Carpetas = fs.readFileSync(rutaCarpetas, 'utf-8');
+const list_Carpetas = JSON.parse(json_Carpetas);
+
+jsonQuery.crearCarpeta = (newUser) => {
+	list_Carpetas.push({
+		propietario: newUser,
+		data: [{ nombreCarpeta: 'Inicial', contenido: [{ idImg: '', type: '' }] }],
+	});
+	var json_Carpeta_new = JSON.stringify(list_Carpetas);
+	fs.writeFileSync(rutaCarpetas, json_Carpeta_new, 'utf-8', (err) => {
+		if (err) {
+			return console.log(err);
+		}
+	});
+};
+
+jsonQuery.renderCarpetas = (req, res) => {
+	// console.log(req.body);
+	var resp = [];
+	for (let index = 0; index < list_Carpetas.length; index++) {
+		if (list_Carpetas[index].propietario == req.body.userAFI) {
+			resp = list_Carpetas[index].data;
+			index = list_Carpetas.length;
+		}
+	}
+	// console.log(resp);
+	res.json(resp);
 };
 
 module.exports = jsonQuery;

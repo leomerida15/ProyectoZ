@@ -94,6 +94,7 @@ buscar.addEventListener(
 				tipos,
 				orientacion,
 			});
+			// console.log(datos);
 
 			buscar.reset();
 
@@ -170,8 +171,9 @@ buscar.addEventListener(
 
 					return 0;
 				});
-				muro.innerHTML = `resultado`;
+				// console.log(resp);
 
+				muro.innerHTML = `resultado`;
 				cuerpo1.innerHTML = ``;
 				resp.forEach((res) => {
 					cuerpo1.innerHTML += `

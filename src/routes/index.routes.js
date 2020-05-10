@@ -18,6 +18,7 @@ const {
 	select_images_inicio_Json,
 	new_gustas_Json,
 	tagsJson,
+	renderCarpetas,
 } = require('../json.Query');
 
 const { buscar } = require('../controllers/busquedas');
@@ -28,7 +29,7 @@ router.post(
 	'/registro',
 	passport.authenticate('registro', {
 		successRedirect: '/',
-		failureRedirect: '/',
+		failureRedirect: '/error',
 		failureFlash: true,
 	})
 );
@@ -51,6 +52,8 @@ router.get('/inicio', isloggedIn, inicio);
 router.get('/salir', salir);
 
 router.get('/api/img', async (req, res) => {
+	console.log('hola');
+
 	let images = await select_images_Json();
 	res.json(images);
 });
@@ -80,8 +83,10 @@ router.post('/data', async (req, res) => {
 	res.json(data);
 });
 
+router.post('/carpetas', renderCarpetas);
+
 router.post('/profile', (req, res) => {
-	console.log(req.files.length);
+	console.log(req.body);
 });
 
 module.exports = router;

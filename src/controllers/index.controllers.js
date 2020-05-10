@@ -3,6 +3,7 @@ const {
 	select_Json,
 	select_images_Json,
 	select_gustas_Json,
+	renderCarpetas,
 } = require('../json.Query');
 
 indexCtrl.renderIndex = async (req, res) => {
@@ -15,13 +16,14 @@ indexCtrl.renderIndex = async (req, res) => {
 		// console.log(coments[j].name, '   ', list[j].name);
 
 		let datos = await list[j].datos;
-
 		await datos.reverse();
-		// console.log(j);
+
 		images[j] = await {
 			name: coments[j].name,
 			ubicacion: coments[j].ubicacion,
 			code_formato: coments[j].code_formato,
+			type: coments[j].type,
+			titulo: coments[j].Titulo,
 			datos,
 			si: gusta[j].si,
 			no: gusta[j].no,
@@ -58,6 +60,7 @@ indexCtrl.inicio = async (req, res) => {
 	let coments = await select_images_Json();
 	let gusta = select_gustas_Json();
 	var images = [];
+
 	for (let j = 0; j <= list.length - 1; j++) {
 		let datos = await list[j].datos;
 
@@ -67,6 +70,8 @@ indexCtrl.inicio = async (req, res) => {
 			name: coments[j].name,
 			ubicacion: coments[j].ubicacion,
 			code_formato: coments[j].code_formato,
+			type: coments[j].type,
+			titulo: coments[j].Titulo,
 			datos,
 			si: gusta[j].si,
 			no: gusta[j].no,
@@ -93,6 +98,7 @@ indexCtrl.inicio = async (req, res) => {
 		{ text: 'blanco' },
 		{ text: 'negro' },
 	];
+	// console.log(images);
 
 	res.render('index-log', { images, colores });
 };

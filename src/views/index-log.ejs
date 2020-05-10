@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>Proyecto-Z</title>
+		<link rel="shortcut icon" href="img/logo.png" />
 		<!--Import Google Icon Font-->
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 		<!--Import materialize.css-->
 		<!-- Compiled and minified CSS -->
 		<link rel="stylesheet" href="/css/materialize.min.css" />
-
 		<!--Let browser know website is optimized for mobile-->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	</head>
-	<body id="todo">
+	<body id="todo" >
 		<%- include('elementos-log/ventanas-log') %>
 		<nav class="nav-extended black">
 			<div class="nav-wrapper nav-content black">
@@ -23,7 +24,7 @@
 		<%- include('partials/respuesta-nolog') %>
 
 			<div class="section">
-				<div id="test1" class="col s12">
+				<div id="test1" class="col s12" id="frente">
 					<%- include('elementos-log/galeria1-log') %>
 				</div>
 				<div id="test2" class="col s12">
@@ -35,9 +36,12 @@
 				<div id="test4" class="col s12">
 					<%- include('elementos-log/galeria4-log') %>
 				</div>
+				<div id="test5" class="col s12">
+					<%- include('elementos-log/perfil') %>
+				</div>
 			</div>
 		</div>
-
+		
 		<%- include('elementos-log/flotante-log') %> 
 		<%- include('elementos-log/subir-img-log') %>
 		<%-include('elementos-log/sidenav-log') %>
@@ -47,9 +51,10 @@
 		<script type="text/javascript" src="js/materialize.min.js"></script>
 		<script src="/js/extra.js"></script>
 		<script src="/js/app.js"></script>
-		<script src="js/buscar.log.js"></script>
+		<script src="/js/buscar.log.js"></script>
 		<script src="/js/tags.js"></script>
 		<script src="/js/x.js"></script>
 		<script src="/js/UI.js"></script>
+		<script src="js/carpetas.js"></script>
 	</body>
 </html>

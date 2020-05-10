@@ -3,12 +3,10 @@ const localstrategy = require('passport-local').Strategy;
 const pool = require('../database');
 const query = require('../query');
 const helpers = require('./helpers');
-
-// console.log(query[0].text);
+const { crearCarpeta } = require('./../json.Query');
 
 passport.use(
 	'login',
-
 	new localstrategy(
 		{
 			usernameField: 'correo_login',
@@ -85,55 +83,45 @@ passport.use(
 				`${newUser.password}`,
 				'usuarioBasico',
 			];
+			try {
+				const res = await pool.query(query[1]);
 
-			const result = await pool.query(query[1], async (err, res) => {
-				if (err) {
-					done(null, false, req.flash('mensaje', 'Error al conectar'));
-				} else {
-					for (let j = 0; j <= res.rows.length - 1; j++) {
-						if (
-							newUser.username == res.rows[j].email ||
-							newUser.usuario == res.rows[j].username
-						) {
-							cheq = cheq + 1;
-							done(
-								null,
-								false,
-								req.flash('mensaje', 'Su usuario o correo ya estan en uso')
-							);
-						}
-					}
-					if (cheq == 0) {
-						if (newUser.password == newUser.confir_clave) {
-							newUser.password = await helpers.encryptPassword(password);
-
-							query[0].values = [
-								`${newUser.username}`,
-								`${newUser.usuario}`,
-								`${newUser.password}`,
-								'usuarioBasico',
-							];
-
-							const guardar_todo = await pool.query(query[0], (err, res) => {
-								if (err) {
-									done(null, false, req.flash('mensaje', 'Error al conectar'));
-								} else {
-									done(null, newUser, req.flash('mensaje', 'correcto'));
-								}
-							});
-						} else {
-							done(
-								null,
-								false,
-								req.flash(
-									'mensaje',
-									'Su Clave y la confirmacion tienen que ser iguales'
-								)
-							);
-						}
+				for (let j = 0; j <= res.rows.length - 1; j++) {
+					if (
+						newUser.username == res.rows[j].email ||
+						newUser.usuario == res.rows[j].username
+					) {
+						cheq = cheq + 1;
+						done(
+							null,
+							false,
+							req.flash('mensaje', 'Su usuario o correo ya estan en uso')
+						);
 					}
 				}
-			});
+				if (cheq == 0) {
+					if (newUser.password == newUser.confir_clave) {
+						newUser.password = await helpers.encryptPassword(password);
+						crearCarpeta(newUser.usuario);
+						query[0].values = [
+							`${newUser.username}`,
+							`${newUser.usuario}`,
+							`${newUser.password}`,
+							'usuarioBasico',
+						];
+						await pool.query(query[0]);
+					} else {
+						done(
+							null,
+							false,
+							req.flash(
+								'mensaje',
+								'Su Clave y la confirmacion tienen que ser iguales'
+							)
+						);
+					}
+				}
+			} catch (error) {}
 		}
 	)
 );

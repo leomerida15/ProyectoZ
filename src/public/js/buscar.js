@@ -152,6 +152,8 @@ buscar.addEventListener(
 
 			var resp = await resul.json();
 
+			// console.log(resp);
+
 			if (resp.includes('err')) {
 				cuerpo.innerHTML = ``;
 				cuerpo.innerHTML += `
@@ -171,7 +173,7 @@ buscar.addEventListener(
 				});
 
 				cuerpo.innerHTML = ``;
-				resp.forEach((res) => {
+				resp.forEach((res, i) => {
 					cuerpo.innerHTML += `
 						<div class="col s12 m4 l3">
 							<div class="material-placeholder">

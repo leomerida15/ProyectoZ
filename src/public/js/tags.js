@@ -10,7 +10,16 @@ $(document).ready(function () {
 			}
 		}
 		if (cheq == 0) {
-			newtag.push(chip.tag);
+			if (tags.split(' ').concat(tags.search).length == 2) {
+				var revision = tags.split(' ');
+				newtag.push(revision[0]);
+			} else {
+				var revision = tags.split(' ').concat(tags);
+				revision.forEach((element) => {
+					newtag.push(element);
+				});
+			}
+
 			inset_tags.value = newtag;
 		} else {
 			alert('las Tags NO pueden llevar , Coma');

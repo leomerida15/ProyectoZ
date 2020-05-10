@@ -1,5 +1,3 @@
-// alert('hola');
-
 document.getElementById('PSD_file').addEventListener('click', () => {
 	file.innerHTML = `	
 	

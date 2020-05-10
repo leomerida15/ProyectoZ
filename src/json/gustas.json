@@ -1,1 +1,15 @@
-[]
+[
+	{
+		"name": "1_iep93k_2bufa6.png",
+		"si": 0,
+		"no": 1,
+		"datos": [{ "usuario": "admin", "gusta": "no" }]
+	},
+	{
+		"name": "2_jdmp98_vbkqve.jpg",
+		"si": 1,
+		"no": 0,
+		"datos": [{ "usuario": "admin", "gusta": "si" }]
+	},
+	{ "name": "3_c7bosj_b4jq4t.jpg", "si": 0, "no": 0, "datos": [] }
+]
