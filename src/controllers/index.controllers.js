@@ -50,8 +50,6 @@ indexCtrl.renderIndex = async (req, res) => {
 		{ text: 'negro' },
 	];
 
-	// console.log('hola');
-
 	res.render('index', { images, colores });
 };
 
@@ -99,8 +97,10 @@ indexCtrl.inicio = async (req, res) => {
 		{ text: 'negro' },
 	];
 	// console.log(images);
+	const STRIPE_PUBLIC_KEY = process.env.STRIPE_PUBLIC_KEY;
+	// console.log(STRIPE_PUBLIC_KEY);
 
-	res.render('index-log', { images, colores });
+	res.render('index-log', { images, colores, STRIPE_PUBLIC_KEY });
 };
 
 indexCtrl.salir = (req, res) => {

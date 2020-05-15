@@ -24,35 +24,32 @@ passport.use(
 			// console.log(datosUser.username);
 			// var savePassword = '';
 
-			query[2].values = [datosUser.username];
+			try {
+				query[2].values = [datosUser.username];
 
-			await pool.query(query[2], async (err, res) => {
-				if (err) {
-					console.log(err.stack);
-				} else {
-					// console.log(res.rows[0]);
-					const user = res.rows[0];
-					if (user) {
-						// console.log('savePassword estoy =', user.password);
-						const validPassword = await helpers.matchPassword(
-							password,
-							user.password
-						);
+				var res = await pool.query(query[2]);
 
-						if (validPassword) {
-							done(null, user, req.flash('success', 'correcto'));
-						} else {
-							done(null, false, req.flash('mensaje', 'verifique su clave'));
-						}
+				const user = res.rows[0];
+				if (user) {
+					// console.log('savePassword estoy =', user.password);
+					const validPassword = await helpers.matchPassword(
+						password,
+						user.password
+					);
+
+					if (validPassword) {
+						done(null, user, req.flash('success', 'correcto'));
 					} else {
-						return done(
-							null,
-							false,
-							req.flash('mensaje', 'el usuario no existe')
-						);
+						done(null, false, req.flash('mensaje', 'verifique su clave'));
 					}
+				} else {
+					return done(
+						null,
+						false,
+						req.flash('mensaje', 'el usuario no existe')
+					);
 				}
-			});
+			} catch (error) {}
 		}
 	)
 );
@@ -97,26 +94,30 @@ passport.use(
 							false,
 							req.flash('mensaje', 'Su usuario o correo ya estan en uso')
 						);
+						j = res.rows.length - 1;
 					}
 				}
 				if (cheq == 0) {
 					if (newUser.password == newUser.confir_clave) {
 						newUser.password = await helpers.encryptPassword(password);
 						crearCarpeta(newUser.usuario);
-						query[0].values = [
+						var user = [
 							`${newUser.username}`,
 							`${newUser.usuario}`,
 							`${newUser.password}`,
 							'usuarioBasico',
 						];
+						query[0].values = user;
 						await pool.query(query[0]);
+
+						done(null, user, req.flash('success', 'correcto'));
 					} else {
 						done(
 							null,
 							false,
 							req.flash(
 								'mensaje',
-								'Su Clave y la confirmacion tienen que ser iguales'
+								'Su Clave y la confirmacion tienen que ser iguales '
 							)
 						);
 					}

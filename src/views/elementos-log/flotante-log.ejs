@@ -14,6 +14,33 @@
 				<i class="material-icons">exit_to_app</i>
 			</a>
 		</li>
+		<% if (user.typeuser==='usuarioBasico') { %>
+		<li>
+			<form id="checkout" action="/checkout" method="POST">
+				<script
+					src="https://checkout.stripe.com/checkout.js"
+					class="stripe-button"
+					data-key="<%=STRIPE_PUBLIC_KEY%>"
+					data-name="Proyecto-Z"
+					data-description="Membresia"
+					data-image="img/minilogo.jpg"
+					data-locale="auto"
+				></script>
+				<script>
+					document.getElementsByClassName('stripe-button-el')[0].style.display =
+						'none';
+				</script>
+				<button
+					class="btn-floating yellow darken-4 waves-effect waves-light tooltipped"
+					data-position="left"
+					data-tooltip="Membresia"
+					name="action"
+				>
+					<i class="material-icons">star_border</i>
+				</button>
+			</form>
+		</li>
+		<% } %>
 		<li>
 			<a
 				href="#subir_img_log"

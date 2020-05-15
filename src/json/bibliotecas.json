@@ -1,14 +1,35 @@
 [
 	{
 		"propietario": "prueba",
+		"guardado": [{ "nombre": "Inicial" }],
 		"data": [
-			{ "nombreCarpeta": "Inicial", "contenido": [{ "idImg": "", "ruta": "" }] }
+			{
+				"nombreCarpeta": "Inicial",
+				"contenido": [
+					{ "idImg": "1_iep93k_2bufa6.png", "ruta": "png/1_iep93k_2bufa6.png" },
+					{ "idImg": "2_jdmp98_vbkqve.jpg", "ruta": "jpg/2_jdmp98_vbkqve.jpg" }
+				]
+			}
 		]
 	},
 	{
 		"propietario": "admin",
+		"guardado": [{ "nombre": "Inicial" }],
 		"data": [
-			{ "nombreCarpeta": "Inicial", "contenido": [{ "idImg": "", "type": "" }] }
+			{
+				"nombreCarpeta": "Inicial",
+				"contenido": [
+					{ "idImg": "3_c7bosj_b4jq4t.jpg", "ruta": "jpg/3_c7bosj_b4jq4t.jpg" },
+					{ "idImg": "1_iep93k_2bufa6.png", "ruta": "png/1_iep93k_2bufa6.png" },
+					{ "idImg": "4_fyryvh_2o9zj9.jpg", "ruta": "jpg/4_fyryvh_2o9zj9.jpg" },
+					{ "idImg": "2_jdmp98_vbkqve.jpg", "ruta": "jpg/2_jdmp98_vbkqve.jpg" }
+				]
+			}
 		]
+	},
+	{
+		"propietario": "admin2",
+		"guardado": [{ "nombre": "Inicial" }],
+		"data": [{ "nombreCarpeta": "Inicial", "contenido": [] }]
 	}
 ]

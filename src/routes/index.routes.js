@@ -1,15 +1,12 @@
 const { Router } = require('express');
 const router = Router();
-
 const passport = require('passport');
-
 const { isloggedIn, isnologgedIn } = require('../config/auth');
 const {
 	inicio,
 	renderIndex,
 	salir,
 } = require('../controllers/index.controllers');
-
 const { subir_img } = require('../controllers/image');
 const {
 	ComentarioJson,
@@ -19,17 +16,18 @@ const {
 	new_gustas_Json,
 	tagsJson,
 	renderCarpetas,
+	guardar_en_carpetas,
 } = require('../json.Query');
-
 const { buscar } = require('../controllers/busquedas');
+const { Membresia } = require('../controllers/pagos');
 
 router.get('/', isnologgedIn, renderIndex);
 
 router.post(
 	'/registro',
 	passport.authenticate('registro', {
-		successRedirect: '/',
-		failureRedirect: '/error',
+		successRedirect: '/inicio',
+		failureRedirect: '/',
 		failureFlash: true,
 	})
 );
@@ -52,8 +50,6 @@ router.get('/inicio', isloggedIn, inicio);
 router.get('/salir', salir);
 
 router.get('/api/img', async (req, res) => {
-	console.log('hola');
-
 	let images = await select_images_Json();
 	res.json(images);
 });
@@ -85,8 +81,16 @@ router.post('/data', async (req, res) => {
 
 router.post('/carpetas', renderCarpetas);
 
+// router.post('/nueva_carpetas', nueva_carpetas);
+
+// router.post('/carpetas_pre', carpetas_pre);
+
+router.post('/guardar_en_carpetas', guardar_en_carpetas);
+
 router.post('/profile', (req, res) => {
 	console.log(req.body);
 });
+
+router.post('/checkout', Membresia);
 
 module.exports = router;

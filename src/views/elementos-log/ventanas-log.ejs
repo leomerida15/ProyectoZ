@@ -26,7 +26,11 @@
 						<div class="col s12 m6">
 							<% if(image.type==='gratis'){ %>
 							<div class="section">
-								<a class="waves-effect waves-light btn">
+								<a
+									href="img/<%=image.ubicacion%>"
+									download=""
+									class="waves-effect waves-light btn"
+								>
 									<i class="material-icons right">archive</i>Gratis</a
 								>
 							</div>
@@ -37,11 +41,30 @@
 								>
 							</div>
 							<% } %>
+
 							<div class="section">
-								<a class="waves-effect waves-light btn">
-									<i class="material-icons right">add_shopping_cart</i
-									>Carrito</a
-								>
+								<form id="guardar_en_carpeta<%=value%>">
+									<input
+										class="white-text hide"
+										type="text"
+										value="<%=user.username%>"
+										name="usuario_carpeta"
+									/>
+									<input
+										class="white-text hide"
+										type="text"
+										value="<%=image.ubicacion%>"
+										name="ruta"
+									/>
+									<button
+										class="btn waves-effect waves-light"
+										type="submit"
+										name="action"
+									>
+										Carrito
+										<i class="material-icons right">add_shopping_cart</i>
+									</button>
+								</form>
 							</div>
 						</div>
 						<div class="col s12 m6">
@@ -192,6 +215,34 @@
 		</div>
 		<div id="js<%=value%>"></div>
 		<script>
+			var guardar_en_carpeta<%=value%> = document.getElementById('guardar_en_carpeta<%=value%>')
+			guardar_en_carpeta<%=value%>.addEventListener('submit', async (e) => {
+				e.preventDefault();
+
+				let datos = new FormData(guardar_en_carpeta<%=value%>)
+				// usuario_carpeta
+				let ruta = datos.get('ruta')
+				let pre = ruta.split('/')
+				var idImg = pre[1]
+				fetch('/guardar_en_carpetas', {
+					method: 'POST',
+					body: datos
+				});
+				// alert('hola')
+
+				archivo.innerHTML += `
+					<div class="col s12 m4 l3">
+						<div class="material-placeholder">
+							<a class="waves-effect waves-light modal-trigger" href="#${idImg}">
+							<img src="img/${ruta}" class="responsive-img " alt="" />
+							</a>
+						</div>
+					</div>
+				`;
+
+
+
+			});
 
 			const new_gusta_si<%=value%> = document.getElementById('si<%=value%>');
 			new_gusta_si<%=value%>.addEventListener(
@@ -240,9 +291,9 @@
 			const llamados<%=value%> = async () => {
 
 				let datos = new FormData(new_mensaje<%=value%>);
-				let correo<%=value%> = datos.get('usuario_mensaje');
+				// let correo<%=value%> = datos.get('usuario_mensaje');
 
-				let mensaje<%=value%> = datos.get('contenido_mensaje');
+				// let mensaje<%=value%> = datos.get('contenido_mensaje');
 
 				let resp = await fetch('/new_mensaje', {
 					method: 'POST',

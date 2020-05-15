@@ -112,11 +112,9 @@ jsonQuery.agregar_images_Json = (carpeta, lugar, newName, req) => {
 		}
 	});
 };
-
 jsonQuery.select_images_Json = () => {
 	return list_images.contenido;
 };
-
 jsonQuery.select_images_inicio_Json = () => {
 	return list_images;
 };
@@ -137,72 +135,71 @@ jsonQuery.agregar_gustas_Json = (newName) => {
 		}
 	});
 };
-
 jsonQuery.new_gustas_Json = (req) => {
 	var gustas = list_gustas;
 	var lugar = 0;
-	// console.log(req.body);
-
+	console.log(req.body);
+	var cheq = 0;
 	for (let i = 0; i <= gustas.length - 1; i++) {
 		if (gustas[i].name == req.body.name_gusta) {
 			let datos = gustas[i].datos;
-			// console.log(datos.length);
-
 			if (req.body.gusta == 'si') {
-				if (datos.length == 0) {
+				for (let j = 0; j <= datos.length - 1; j++) {
+					if (datos[j].usuario == req.body.usuario_gusta) {
+						cheq = 1;
+						if (datos[j].gusta == 'no') {
+							gustas[i].datos[j].gusta = 'si';
+							lugar = i;
+							if (gustas[i].no > 0) {
+								gustas[i].no = gustas[i].no - 1;
+							}
+							gustas[i].si = gustas[i].si + 1;
+							j = datos.length - 1;
+						} else if (datos[j].gusta == 'si') {
+							j = datos.length - 1;
+						}
+					}
+				}
+				if (cheq == 0) {
 					gustas[i].datos.push({
 						usuario: req.body.usuario_gusta,
 						gusta: req.body.gusta,
 					});
 					gustas[i].si = gustas[i].si + 1;
-				} else {
-					for (let j = 0; j <= datos.length - 1; j++) {
-						if (datos[j].usuario == req.body.usuario_gusta) {
-							if (datos[j].gusta == 'no') {
-								datos[j].gusta = 'si';
-								lugar = i;
-								if (gustas[i].no > 0) {
-									gustas[i].no = gustas[i].no - 1;
-								}
-								gustas[i].si = gustas[i].si + 1;
-								j = datos.length - 1;
-							} else if (datos[j].gusta == 'si') {
-								j = datos.length - 1;
+				}
+			} else {
+				for (let j = 0; j <= datos.length - 1; j++) {
+					if (datos[j].usuario == req.body.usuario_gusta) {
+						cheq = 1;
+						if (datos[j].gusta == 'si') {
+							datos[j].gusta = 'no';
+							lugar = i;
+							if (gustas[i].si > 0) {
+								gustas[i].si = gustas[i].si - 1;
 							}
+							gustas[i].no = gustas[i].no + 1;
+							j = datos.length - 1;
+						} else if (datos[j].gusta == 'no') {
+							j = datos.length - 1;
 						}
 					}
 				}
-			} else {
-				if (datos.length == 0) {
+				if (cheq == 0) {
 					gustas[i].datos.push({
 						usuario: req.body.usuario_gusta,
 						gusta: req.body.gusta,
 					});
 					gustas[i].no = gustas[i].no + 1;
-				} else {
-					for (let j = 0; j <= datos.length - 1; j++) {
-						if (datos[j].usuario == req.body.usuario_gusta) {
-							if (datos[j].gusta == 'si') {
-								datos[j].gusta = 'no';
-								lugar = i;
-								if (gustas[i].si > 0) {
-									gustas[i].si = gustas[i].si - 1;
-								}
-								gustas[i].no = gustas[i].no + 1;
-								j = datos.length - 1;
-							} else if (datos[j].gusta == 'no') {
-								j = datos.length - 1;
-							}
-						}
-					}
 				}
 			}
 		}
 	}
 
-	var resp = { si: gustas[lugar].si, no: gustas[lugar].no };
+	// var resp = { si: gustas[lugar].si, no: gustas[lugar].no };
 
-	// console.log(resp);
+	for (let index = 0; index < gustas.length; index++) {
+		console.log(gustas[index].datos);
+	}
 
 	var json_gusta_new = JSON.stringify(gustas);
 	fs.writeFileSync(ruta_gustas, json_gusta_new, 'utf-8', function (err) {
@@ -211,9 +208,8 @@ jsonQuery.new_gustas_Json = (req) => {
 		}
 	});
 
-	return resp;
+	// return resp;
 };
-
 jsonQuery.select_gustas_Json = () => {
 	return list_gustas;
 };
@@ -225,11 +221,9 @@ const list_tags = JSON.parse(json_tags);
 jsonQuery.tagsJson = () => {
 	return list_tags.tags_existentes;
 };
-
 jsonQuery.tags_search_Json = () => {
 	return list_tags.for_tag;
 };
-
 jsonQuery.agregarTags = async (req, lugar, fotmat, newName) => {
 	var cadenaADividir = req.body.tags;
 	const newTags = await cadenaADividir.split(',');
@@ -304,7 +298,13 @@ const list_Carpetas = JSON.parse(json_Carpetas);
 jsonQuery.crearCarpeta = (newUser) => {
 	list_Carpetas.push({
 		propietario: newUser,
-		data: [{ nombreCarpeta: 'Inicial', contenido: [{ idImg: '', type: '' }] }],
+		guardado: [{ nombre: 'Inicial' }],
+		data: [
+			{
+				nombreCarpeta: 'Inicial',
+				contenido: [],
+			},
+		],
 	});
 	var json_Carpeta_new = JSON.stringify(list_Carpetas);
 	fs.writeFileSync(rutaCarpetas, json_Carpeta_new, 'utf-8', (err) => {
@@ -313,8 +313,8 @@ jsonQuery.crearCarpeta = (newUser) => {
 		}
 	});
 };
-
 jsonQuery.renderCarpetas = (req, res) => {
+	// console.log('hola');
 	// console.log(req.body);
 	var resp = [];
 	for (let index = 0; index < list_Carpetas.length; index++) {
@@ -326,5 +326,84 @@ jsonQuery.renderCarpetas = (req, res) => {
 	// console.log(resp);
 	res.json(resp);
 };
+jsonQuery.guardar_en_carpetas = async (req, res) => {
+	const ruta = req.body.ruta;
+	const splits = await req.body.ruta.split('/');
+	const idImg = splits[1];
+	var cheq = 0;
+	for (let a = 0; a < list_Carpetas.length; a++) {
+		if (list_Carpetas[a].propietario == req.body.usuario_carpeta) {
+			let PreNombres = list_Carpetas[a].guardado;
+			for (let b = 0; b < PreNombres.length; b++) {
+				const PreNombre = PreNombres[b].nombre;
+				for (let b = 0; b < list_Carpetas[a].data.length; b++) {
+					let infoCarpetas = list_Carpetas[a].data;
+					if (infoCarpetas[b].nombreCarpeta == PreNombre) {
+						for (
+							let c = 0;
+							c < list_Carpetas[a].data[b].contenido.length;
+							c++
+						) {
+							if (idImg == list_Carpetas[a].data[b].contenido[c].idImg) {
+								cheq = 1;
+							}
+						}
+						if (cheq == 0) {
+							list_Carpetas[a].data[b].contenido.push({ idImg, ruta });
+						}
+					}
+				}
+			}
+
+			a = list_Carpetas.length;
+		}
+	}
+	var json_Carpeta_new = JSON.stringify(list_Carpetas);
+	fs.writeFileSync(rutaCarpetas, json_Carpeta_new, 'utf-8', (err) => {
+		if (err) {
+			return console.log(err);
+		}
+	});
+};
 
 module.exports = jsonQuery;
+
+// jsonQuery.carpetas_pre = (req, res) => {
+// 	console.log(req.body);
+// var listaGuardados = [];
+// for (let index = 0; index < array.length; index++) {
+// 	const element = array[index];
+// 	req.body.selectPreCarpeta;
+// }
+// 	for (let index = 0; index < list_Carpetas.length; index++) {
+// 		if (list_Carpetas[index].propietario == req.body.userAFI) {
+// 			list_Carpetas[index].guardado = listaGuardados;
+// 			index = list_Carpetas.length;
+// 		}
+// 	}
+// var json_Carpeta_new = JSON.stringify(list_Carpetas);
+// fs.writeFileSync(rutaCarpetas, json_Carpeta_new, 'utf-8', (err) => {
+// 	if (err) {
+// 		return console.log(err);
+// 	}
+// });
+// };
+// jsonQuery.nueva_carpetas = (req, res) => {
+// 	// console.log(req.body);
+// 	for (let index = 0; index < list_Carpetas.length; index++) {
+// 		if (list_Carpetas[index].propietario == req.body.userAFI) {
+// 			list_Carpetas[index].data.push({
+// 				nombreCarpeta: req.body.nombre,
+// 				contenido: [{ idImg: '', ruta: '' }],
+// 			});
+// 			index = list_Carpetas.length;
+// 		}
+// 	}
+// 	var json_Carpeta_new = JSON.stringify(list_Carpetas);
+// 	fs.writeFileSync(rutaCarpetas, json_Carpeta_new, 'utf-8', (err) => {
+// 		if (err) {
+// 			return console.log(err);
+// 		}
+// 	});
+// 	res.json(req.body.userAFI);
+// };

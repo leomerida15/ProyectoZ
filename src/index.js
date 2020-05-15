@@ -8,6 +8,8 @@ const uuidv4 = require('uuid/v4');
 
 // initialize
 const app = express();
+require('dotenv').config();
+
 require('./config/passport');
 
 // settings
@@ -25,7 +27,7 @@ app.use(
 	session({
 		secret: 'secreto',
 		resave: false,
-		saveUninitialized: false
+		saveUninitialized: false,
 	})
 );
 app.use(flash());
@@ -36,7 +38,7 @@ const storage = multer.diskStorage({
 	destination: path.join(__dirname, './public/img/subidas'),
 	filename: (req, file, cb, filename) => {
 		cb(null, uuidv4() + path.extname(file.originalname));
-	}
+	},
 });
 
 app.use(
@@ -55,7 +57,7 @@ app.use(
 				return cb(null, true);
 			}
 			cb('error tipo de archivo incorrecto');
-		}*/
+		}*/,
 	}).array('subir_img', 2)
 );
 

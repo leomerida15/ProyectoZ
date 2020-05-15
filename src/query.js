@@ -30,6 +30,14 @@ const query = [
 		values: ['psd'],
 	},
 	{ text: 'SELECT name , ubicacion , code_formato from ii_fn_img ' },
+	{
+		text: 'INSERT INTO ii_fn_pagos(id, monoto, email) VALUES($1, $2, $3)',
+		values: '',
+	},
+	{
+		text: 'update  i_fn_usuario set typeuser=$1 where email=$2',
+		values: '',
+	},
 ];
 
 module.exports = query;
